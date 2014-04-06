@@ -13,6 +13,7 @@ Useful when scrapping.
 * [Install](#install)
 * [Use](#use)
   - [Params](#params)
+  - [Callback](#callback)
 * [Example](#example)
 
 
@@ -48,7 +49,7 @@ requestCached(params, callback);
 [requestParams]: https://github.com/mikeal/request#requestoptions-callback "Params in request library"
 
 
-## Callback arguments:
+### Callback:
 
 1. First argument of [request callback][requestParams]
 2. Second argument of [request callback][requestParams]
