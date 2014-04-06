@@ -9,11 +9,11 @@
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/germanrio/request-cached.git"
   },
   "keywords": [
     "request",
-    "cached",
+    "cache",
     "scrapper"
   ],
   "author": "German RIO",
