@@ -49,7 +49,7 @@ requestCached(params, callback);
 [requestParams]: https://github.com/mikeal/request#requestoptions-callback "Params in request library"
 
 
-### Callback:
+### Callback
 
 1. First argument of [request callback][requestParams]
 2. Second argument of [request callback][requestParams]
@@ -61,7 +61,7 @@ requestCached(params, callback);
 
 ```javascript
 var requestCached = require('request-cached'),
-    userId = 12345s;
+    userId = 12345;
 
 var params = {
   main: {
