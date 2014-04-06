@@ -1,22 +1,24 @@
 Request cached
-================
+===============
 
 
-{
+## Options
+
+  {
     main: {
-        uri: 'serverUrl',
-        qs: {
-          id: 'userId'
-        }
+      uri: 'serverUrl',
+      qs: {
+        id: 'userId'
+      }
     },
     cache: {
-        uri: 'cachedUrl'
+      uri: 'cachedUrl'
     },
     save: {
-        path: [userId, page].join('_')
+      path: [userId, page].join('_')
     },
     request: {
       proxy: 'http://localhost:8880',
       encoding: 'utf8'
     }
-}
+  }
