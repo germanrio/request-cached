@@ -1,0 +1,29 @@
+{
+  "name": "request-cached",
+  "version": "0.0.1",
+  "description": "Add local server to request to cache requests",
+  "main": "lib/index.js",
+  "scripts": {
+    "start": "echo \"Error: no start specified\" && exit 1",
+    "test": "node_modules/.bin/mocha -w -d -R spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "request",
+    "cached",
+    "scrapper"
+  ],
+  "author": "German RIO",
+  "license": "MIT",
+  "dependencies": {
+    "request": "~2.34.0",
+    "lodash": "~2.4.1"
+  },
+  "devDependencies": {
+    "mocha": "~1.18.2",
+    "chai": "~1.9.1"
+  }
+}
