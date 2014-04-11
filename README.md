@@ -18,7 +18,6 @@ Useful when scrapping.
 
 
 ## Install
-
 Install request-cached with npm.
 
 ```
@@ -27,7 +26,6 @@ npm install request-cached --save
 
 
 ## Use
-
 ```javascript
 var requestCached = require('request-cached');
 requestCached(params, callback);
@@ -35,7 +33,6 @@ requestCached(params, callback);
 
 
 ### Params
-
 * `main`: Compulsory object where are set the params to access real data
   - All possible [request params][requestParams]
 * `cache`: Optional object where are set the params to access cached data
@@ -50,7 +47,6 @@ requestCached(params, callback);
 
 
 ### Callback
-
 1. First argument of [request callback][requestParams]
 2. Second argument of [request callback][requestParams]
 3. Third argument of [request callback][requestParams]
@@ -86,3 +82,17 @@ requestCached(params, function (error, response, body, isCached) {
   console.log(body);
 });
 ```
+
+
+## Code testing
+
+If you wanna test the code, follow these steps:
+
+```
+> git clone https://github.com/germanrio/request-cached.git
+> cd request-cached
+> npm install
+> npm test
+```
+Note: Of course is needed to have properly installed node and npm.
+
