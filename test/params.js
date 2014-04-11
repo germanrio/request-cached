@@ -11,50 +11,50 @@ describe('Check default params', function () {
 
   it('should throw error when uri is missing', function () {
     expect(function () {
-        checkDefaults({});
+      checkDefaults({});
     }).to.throw('Uri or url');
 
     expect(function () {
-        checkDefaults({main: {}});
+      checkDefaults({main: {}});
     }).to.throw('Uri or url');
 
     expect(function () {
-        checkDefaults({cache: {}});
+      checkDefaults({cache: {}});
     }).to.throw('Uri or url');
 
     expect(function () {
-        checkDefaults({main: {uri: ''}});
+      checkDefaults({main: {uri: ''}});
     }).to.throw('Uri or url');
 
     expect(function () {
-        checkDefaults({main: {uri: 'http'}});
+      checkDefaults({main: {uri: 'http'}});
     }).to.not.throw('Uri or url');
 
     expect(function () {
-        checkDefaults({main: {url: 'http'}});
+      checkDefaults({main: {url: 'http'}});
     }).to.not.throw('Uri or url');
   });
 
   it('should throw exception when save path is missing', function () {
     expect(function () {
-        checkDefaults({
-            main: {url: 'http'},
-            save: {}
-        });
+      checkDefaults({
+        main: {url: 'http'},
+        save: {}
+      });
     }).to.throw('Save path');
 
     expect(function () {
-        checkDefaults({
-            main: {url: 'http'},
-            save: {path: ''}
-        });
+      checkDefaults({
+        main: {url: 'http'},
+        save: {path: ''}
+      });
     }).to.throw('Save path');
 
     expect(function () {
-        checkDefaults({
-            main: {url: 'http'},
-            save: {path: '/tmp'}
-        });
+      checkDefaults({
+        main: {url: 'http'},
+        save: {path: '/tmp'}
+      });
     }).to.not.throw('Save path');
   });
 });
