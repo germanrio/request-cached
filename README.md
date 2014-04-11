@@ -39,7 +39,7 @@ requestCached(params, callback);
   - All possible [request params][requestParams]
 * `save`: Optional object where are set the params to save real data
   - path: Path to save data to
-  - fn: Function used to modify data before saving them
+  - parseFn: Function used to modify data before saving them
 * `request`: Optional object where are set the additional params to access real and cached data
   - All possible [request params][requestParams]
 
