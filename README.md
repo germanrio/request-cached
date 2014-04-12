@@ -85,7 +85,6 @@ requestCached(params, function (error, response, body, isCached) {
 
 
 ## Code testing
-
 If you wanna test the code, follow these steps:
 
 ```
@@ -105,3 +104,8 @@ If you also want to see the code coverage of tests:
 ```
 
 It will generate a `coverage` folder with the coverage report.
+
+
+## License
+MIT
+More details in the `LICENSE` file in root folder.
