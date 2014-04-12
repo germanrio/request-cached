@@ -7,7 +7,7 @@
   // Define globals exposed by Node.js.
   "node": true,
 
-  "predef": ["describe", "it"],
+  "predef": ["describe", "it", "before", "after", "beforeEach", "afterEach"],
 
   /*
    * ENFORCING OPTIONS
