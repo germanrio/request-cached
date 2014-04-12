@@ -5,7 +5,8 @@
   "main": "lib/index.js",
   "scripts": {
     "start": "./node_modules/.bin/mocha -w -d -R spec",
-    "test": "./node_modules/.bin/mocha -R spec"
+    "test": "./node_modules/.bin/mocha -R spec",
+    "cov": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec"
   },
   "repository": {
     "type": "git",

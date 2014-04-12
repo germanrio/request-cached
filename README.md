@@ -96,3 +96,12 @@ If you wanna test the code, follow these steps:
 ```
 Note: Of course is needed to have properly installed node and npm.
 
+
+### Code coverage
+If you also want to see the code coverage of tests:
+
+```
+> npm run cov
+```
+
+It will generate a `coverage` folder with the coverage report.
