@@ -30,7 +30,7 @@ npm install request-cached --save
 
 ## Use
 ```javascript
-var requestCached = require('request-cached');
+var requestCached = require('request-cached').getPage;
 requestCached(params, callback);
 ```
 
@@ -42,7 +42,7 @@ requestCached(params, callback);
   - All possible [request params][requestParams]
 * `save`: Optional object where are set the params to save real data
   - path: Path to save data to
-  - parseFn: Function used to modify data before saving them
+  - parseFn: Function used to modify data before saving it
 * `request`: Optional object where are set the additional params to access real and cached data
   - All possible [request params][requestParams]
 
@@ -59,7 +59,7 @@ requestCached(params, callback);
 ## Example
 
 ```javascript
-var requestCached = require('request-cached');
+var requestCached = require('request-cached').getPage;
 
 function getParams(userId) {
   return {
