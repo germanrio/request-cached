@@ -59,29 +59,31 @@ requestCached(params, callback);
 ## Example
 
 ```javascript
-var requestCached = require('request-cached'),
-    userId = 12345;
+var requestCached = require('request-cached');
 
-var params = {
-  main: {
-    uri: 'http://real/data/domain/mainUrl',
-    qs: {
-      id: userId
+function getParams(userId) {
+  return {
+    main: {
+      uri: 'http://real/data/domain/mainUrl',
+      qs: {
+        id: userId
+      }
+    },
+    cache: {
+      uri: 'http://localhost/cachedUrl/' + userId
+    },
+    save: {
+      path: '/var/www/cachedUrl/' + userId
+    },
+    request: {
+      proxy: 'http://localhost:8080',
+      encoding: 'utf8'
     }
-  },
-  cache: {
-    uri: 'http://localhost/cachedUrl/' + userId
-  },
-  save: {
-    path: '/var/www/cachedUrl/' + userId
-  },
-  request: {
-    proxy: 'http://localhost:8080',
-    encoding: 'utf8'
-  }
-};
+  };
+}
 
-requestCached(params, function (error, response, body, isCached) {
+var userId = 12345;
+requestCached(getParams(userId), function (error, response, body, isCached) {
   console.log(body);
 });
 ```
