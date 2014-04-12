@@ -15,6 +15,9 @@ Useful when scrapping.
   - [Params](#params)
   - [Callback](#callback)
 * [Example](#example)
+* [Code testing](#code-testing)
+  - [Code coverage](#code-coverage)
+* [License](#license)
 
 
 ## Install

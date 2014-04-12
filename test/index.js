@@ -52,6 +52,7 @@ describe('Get page', function () {
 
   it('should get data from cache when available', function (done) {
     getPage(okParams, function (err, isCached) {
+      expect(checkParamsStub).to.have.been.calledOnce;
       expect(cacheStub).to.have.been.calledOnce;
       expect(isCached).to.be.true;
       done();
@@ -60,6 +61,7 @@ describe('Get page', function () {
 
   it('should get data from main when cache not available', function (done) {
     getPage(errorParams, function (err, isCached) {
+      expect(checkParamsStub).to.have.been.calledOnce;
       expect(cacheStub).to.have.been.calledOnce;
       expect(mainStub).to.have.been.calledOnce;
       expect(isCached).to.be.false;
