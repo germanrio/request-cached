@@ -93,7 +93,7 @@ If you wanna test the code, follow these steps:
 > npm install
 > npm test
 ```
-Note: Of course is needed to have properly installed node and npm.
+**Note:** Of course is needed to have properly installed node and npm.
 
 
 ### Code coverage
@@ -108,4 +108,5 @@ It will generate a `coverage` folder with the coverage report.
 
 ## License
 MIT
+
 More details in the `LICENSE` file in root folder.
