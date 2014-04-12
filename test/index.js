@@ -27,7 +27,8 @@ describe('Get page', function () {
     cacheStub = sinon.stub(request, 'cache', getMock);
 
     // In this case should be loaded after setting the stubs
-    // It's because getPage alias all methods when loading
+    // It's because 'getPage' alias all methods when loading
+    delete require.cache[require.resolve('../lib')];
     getPage = require('../lib').getPage;
   });
 
