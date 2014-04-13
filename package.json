@@ -1,24 +1,36 @@
 {
   "name": "request-cached",
   "version": "0.0.1",
-  "description": "Add local server to request to cache requests",
+  "description": "This library adds to request library the ability to cache data retrieved from a real server into a local server.",
   "main": "lib/index.js",
   "scripts": {
     "start": "./node_modules/.bin/mocha -w -d -R spec",
     "test": "./node_modules/.bin/mocha -R spec",
     "cov": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec"
   },
+  "homepage": "https://github.com/germanrio/request-cached",
   "repository": {
     "type": "git",
     "url": "https://github.com/germanrio/request-cached.git"
+  },
+  "bugs": {
+    "url": "https://github.com/germanrio/request-cached/issues"
   },
   "keywords": [
     "request",
     "cache",
     "scrapper"
   ],
-  "author": "German RIO",
+  "author": {
+    "name": "German RIO",
+    "email": "german@germanrio.es",
+    "url": "http://www.germanrio.es"
+  },
   "license": "MIT",
+  "files": [
+    "lib",
+    "LICENSE"
+  ],
   "dependencies": {
     "request": "~2.34.0",
     "lodash": "~2.4.1"
