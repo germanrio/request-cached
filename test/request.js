@@ -65,7 +65,7 @@ describe('Request', function () {
       getCache(params, function (err, reqRes) {
         expect(requestStub).to.have.been.calledOnce;
         expect(err).to.be.false;
-        expect(_.toArray(reqRes)).to.be.eql(response);
+        expect(reqRes).to.be.eql(response);
         done();
       });
     });
@@ -82,14 +82,14 @@ describe('Request', function () {
       getCache(params, function (err, reqRes) {
         expect(requestStub).to.have.been.calledOnce;
         expect(err).to.be.ok;
-        expect(_.toArray(reqRes)).to.be.eql(response);
+        expect(reqRes).to.be.eql(response);
 
         // Status code not 200
         response = [false, {statusCode: 500}, 'text'];
         getCache(params, function (err, reqRes) {
           expect(requestStub).to.have.been.calledTwice;
           expect(err).to.be.ok;
-          expect(_.toArray(reqRes)).to.be.eql(response);
+          expect(reqRes).to.be.eql(response);
           done();
         });
       });
@@ -109,7 +109,7 @@ describe('Request', function () {
         expect(requestStub).to.have.been.calledOnce;
         expect(saveStub).to.have.not.been.called;
         expect(err).to.be.false;
-        expect(_.toArray(reqRes)).to.be.eql(response);
+        expect(reqRes).to.be.eql(response);
         done();
       });
     });
@@ -127,7 +127,7 @@ describe('Request', function () {
         expect(requestStub).to.have.been.calledOnce;
         expect(saveStub).to.have.been.calledOnce;
         expect(err).to.be.false;
-        expect(_.toArray(reqRes)).to.be.eql(response);
+        expect(reqRes).to.be.eql(response);
         done();
       });
     });
@@ -146,7 +146,7 @@ describe('Request', function () {
         expect(requestStub).to.have.been.calledOnce;
         expect(saveStub).to.have.not.been.called;
         expect(err).to.be.ok;
-        expect(_.toArray(reqRes)).to.be.eql(response);
+        expect(reqRes).to.be.eql(response);
 
         // Status code not 200
         response = [false, {statusCode: 500}, 'text'];
@@ -154,7 +154,7 @@ describe('Request', function () {
           expect(requestStub).to.have.been.calledTwice;
           expect(saveStub).to.have.not.been.called;
           expect(err).to.be.ok;
-          expect(_.toArray(reqRes)).to.be.eql(response);
+          expect(reqRes).to.be.eql(response);
           done();
         });
       });
