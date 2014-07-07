@@ -3,11 +3,15 @@ var chai = require('chai'),
     sinonChai = require('sinon-chai'),
     expect = chai.expect,
     fs = require('fs'),
+    mkdirp = require('mkdirp'),
+    path = require('path'),
 
     savePage = require('../lib/save').page,
     errorPath = 'not/a/folder',
     okPath = '/tmp',
-    fsStub,
+    mkdirpStub,
+    pathStub,
+    fsWriteStub,
     consoleStub;
 
 chai.use(sinonChai);
@@ -20,17 +24,23 @@ describe('Save page', function () {
       callback(path === errorPath);
     }
 
-    fsStub = sinon.stub(fs, 'writeFile', fsMock);
+    mkdirpStub = sinon.stub(mkdirp, 'sync');
+    pathStub = sinon.stub(path, 'dirname');
+    fsWriteStub = sinon.stub(fs, 'writeFile', fsMock);
     consoleStub = sinon.stub(console, 'error');
   });
 
   after(function () {
-    fsStub.restore();
+    mkdirpStub.restore();
+    pathStub.restore();
+    fsWriteStub.restore();
     consoleStub.restore();
   });
 
   beforeEach(function () {
-    fsStub.reset();
+    mkdirpStub.reset();
+    pathStub.reset();
+    fsWriteStub.reset();
     consoleStub.reset();
   });
 
@@ -41,8 +51,10 @@ describe('Save page', function () {
 
     savePage(reqParams, saveParams, body);
 
-    expect(fsStub).to.have.been.calledOnce;
-    expect(fsStub).to.have.been.calledWith(okPath, body);
+    expect(mkdirpStub).to.have.been.calledOnce;
+    expect(pathStub).to.have.been.calledOnce;
+    expect(fsWriteStub).to.have.been.calledOnce;
+    expect(fsWriteStub).to.have.been.calledWith(okPath, body);
     expect(consoleStub).to.have.not.been.called;
   });
 
@@ -56,8 +68,8 @@ describe('Save page', function () {
     savePage(reqParams, saveParams, body);
 
     expect(parseFn).to.have.been.calledOnce;
-    expect(fsStub).to.have.been.calledOnce;
-    expect(fsStub).to.have.been.calledWith(okPath, bodyParsed);
+    expect(fsWriteStub).to.have.been.calledOnce;
+    expect(fsWriteStub).to.have.been.calledWith(okPath, bodyParsed);
     expect(consoleStub).to.have.not.been.called;
   });
 
@@ -68,8 +80,8 @@ describe('Save page', function () {
 
     savePage(reqParams, saveParams, body);
 
-    expect(fsStub).to.have.been.calledOnce;
-    expect(fsStub).to.have.been.calledWith(okPath, JSON.stringify(body));
+    expect(fsWriteStub).to.have.been.calledOnce;
+    expect(fsWriteStub).to.have.been.calledWith(okPath, JSON.stringify(body));
     expect(consoleStub).to.have.not.been.called;
   });
 
@@ -80,6 +92,8 @@ describe('Save page', function () {
 
     savePage(reqParams, saveParams, body);
 
+    expect(mkdirpStub).to.have.been.calledOnce;
+    expect(pathStub).to.have.been.calledOnce;
     expect(consoleStub).to.have.been.calledOnce;
     expect(consoleStub).to.have.been.calledWith(true);
   });
