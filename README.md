@@ -1,5 +1,13 @@
 # Request cached
 
+[![Build Status][travisImg]][travisUrl] [![Coverage Status][coverallsImg]][coverallsUrl]
+
+[travisImg]: https://travis-ci.org/germanrio/request-cached.svg?branch=master
+[travisUrl]: https://travis-ci.org/germanrio/request-cached
+
+[coverallsImg]: https://img.shields.io/coveralls/germanrio/request-cached.svg
+[coverallsUrl]: https://coveralls.io/r/germanrio/request-cached
+
 This library adds to [request library][requestWeb] the ability to cache data retrieved from a real server into a local server.
 
 So, when you are requesting the data for the first time, the data will be retrieved from the real server and saved locally. And whenever you do the request for a second time, the data is retrieved locally.
