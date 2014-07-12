@@ -4,9 +4,10 @@
   "description": "This library adds to request library the ability to cache data retrieved from a real server into a local server.",
   "main": "lib/index.js",
   "scripts": {
-    "start": "./node_modules/.bin/mocha -w -d -R spec",
-    "test": "./node_modules/.bin/mocha -R spec",
-    "cov": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec"
+    "start": "mocha -w -d -R spec",
+    "test": "mocha -R spec",
+    "cov": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec",
+    "covSave": "coveralls < coverage/lcov.info"
   },
   "homepage": "https://github.com/germanrio/request-cached",
   "repository": {
@@ -40,6 +41,8 @@
     "mocha": "~1.18.2",
     "chai": "~1.9.1",
     "sinon-chai": "~2.5.0",
-    "sinon": "~1.9.1"
+    "sinon": "~1.9.1",
+    "coveralls": "~2.11.1",
+    "istanbul": "~0.3.0"
   }
 }
