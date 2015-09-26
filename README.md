@@ -1,12 +1,17 @@
 # Request cached
 
-[![Build Status][travisImg]][travisUrl] [![Coverage Status][coverallsImg]][coverallsUrl]
+[![Build Status][travisImg]][travisUrl]
+[![Coverage Status][coverallsImg]][coverallsUrl]
+[![NPM Version][npmImg]][npmUrl]
 
 [travisImg]: https://travis-ci.org/germanrio/request-cached.svg?branch=master
 [travisUrl]: https://travis-ci.org/germanrio/request-cached
 
 [coverallsImg]: https://img.shields.io/coveralls/germanrio/request-cached.svg
 [coverallsUrl]: https://coveralls.io/r/germanrio/request-cached
+
+[npmImg]: https://img.shields.io/npm/v/request-cached.svg
+[npmUrl]: https://npmjs.org/package/request-cached
 
 This library adds to [request library][requestWeb] the ability to cache data retrieved from a real server into a local server.
 
