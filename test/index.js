@@ -1,35 +1,33 @@
-var chai = require('chai'),
+/* eslint-disable no-unused-expressions */
+const chai = require('chai'),
     sinon = require('sinon'),
     sinonChai = require('sinon-chai'),
     expect = chai.expect,
+
     params = require('../lib/params'),
     request = require('../lib/request'),
+    mainRequestInstance = {mainInstance: true},
+    cacheRequestInstance = {cacheInstance: true},
+    reqParams = 'ok';
 
-    getPage,
-    errorParams = 'not ok',
-    okParams = 'ok',
+let requestCached,
     checkParamsStub,
     mainStub,
     cacheStub;
 
 chai.use(sinonChai);
 
+
 describe('Get page', function () {
   before(function () {
-
-    function getMock(params, callback) {
-      var error = (params === errorParams);
-      callback(error, [error]);
-    }
-
     checkParamsStub = sinon.stub(params, 'checkDefaults');
-    mainStub = sinon.stub(request, 'main', getMock);
-    cacheStub = sinon.stub(request, 'cache', getMock);
+    mainStub = sinon.stub(request, 'getMain');
+    cacheStub = sinon.stub(request, 'getCache');
 
     // In this case should be loaded after setting the stubs
-    // It's because 'getPage' alias all methods when loading
+    // It's because 'requestCached' alias all methods when loading
     delete require.cache[require.resolve('../lib')];
-    getPage = require('../lib').getPage;
+    requestCached = require('../lib');
   });
 
   after(function () {
@@ -39,35 +37,78 @@ describe('Get page', function () {
   });
 
   beforeEach(function () {
-    checkParamsStub.reset();
+    checkParamsStub.resetHistory();
     mainStub.reset();
     cacheStub.reset();
   });
 
-  it('should check params', function (done) {
-    getPage(okParams, function () {
-      expect(checkParamsStub).to.have.been.calledOnce;
-      done();
-    });
+  it('should throw error when main params missing', function () {
+    expect(function () {
+      requestCached();
+    }).to.throw('Request param needed');
   });
 
-  it('should get data from cache when available', function (done) {
-    getPage(okParams, function (err, isCached) {
-      expect(checkParamsStub).to.have.been.calledOnce;
-      expect(cacheStub).to.have.been.calledOnce;
-      expect(isCached).to.be.true;
-      done();
-    });
+  it('should check params', function () {
+    const getPage = requestCached(mainRequestInstance);
+    cacheStub.resolves(true);
+
+    return getPage(reqParams)
+      .then(() => {
+        expect(checkParamsStub).to.have.been.calledOnce;
+        expect(checkParamsStub).to.have.been.calledWithExactly(reqParams);
+      });
   });
 
-  it('should get data from main when cache not available', function (done) {
-    getPage(errorParams, function (err, isCached) {
-      expect(checkParamsStub).to.have.been.calledOnce;
-      expect(cacheStub).to.have.been.calledOnce;
-      expect(mainStub).to.have.been.calledOnce;
-      expect(isCached).to.be.false;
-      done();
-    });
+  it('should use main request instance for cache if not provided', function () {
+    const getPage = requestCached(mainRequestInstance);
+    cacheStub.resolves(true);
+
+    return getPage(reqParams)
+      .then(() => {
+        expect(cacheStub).to.have.been.calledOnce;
+        expect(cacheStub).to.have.been.calledWithExactly(mainRequestInstance, reqParams);
+      });
   });
 
+  it('should use cache request instance for cache if provided', function () {
+    const getPage = requestCached(mainRequestInstance, cacheRequestInstance);
+    cacheStub.resolves(true);
+
+    return getPage(reqParams)
+      .then(() => {
+        expect(cacheStub).to.have.been.calledOnce;
+        expect(cacheStub).to.have.been.calledWithExactly(cacheRequestInstance, reqParams);
+      });
+  });
+
+  it('should get data from cache when available', function () {
+    const getPage = requestCached(mainRequestInstance, cacheRequestInstance);
+    cacheStub.resolves({isCached: true});
+
+    return getPage(reqParams)
+      .then((result) => {
+        expect(checkParamsStub).to.have.been.calledOnce;
+        expect(checkParamsStub).to.have.been.calledWithExactly(reqParams);
+        expect(cacheStub).to.have.been.calledOnce;
+        expect(cacheStub).to.have.been.calledWithExactly(cacheRequestInstance, reqParams);
+        expect(result.isCached).to.be.true;
+      });
+  });
+
+  it('should get data from main when cache not available', function () {
+    const getPage = requestCached(mainRequestInstance, cacheRequestInstance);
+    cacheStub.rejects();
+    mainStub.resolves({isCached: false});
+
+    return getPage(reqParams)
+      .then((result) => {
+        expect(checkParamsStub).to.have.been.calledOnce;
+        expect(checkParamsStub).to.have.been.calledWithExactly(reqParams);
+        expect(cacheStub).to.have.been.calledOnce;
+        expect(cacheStub).to.have.been.calledWithExactly(cacheRequestInstance, reqParams);
+        expect(mainStub).to.have.been.calledOnce;
+        expect(mainStub).to.have.been.calledWithExactly(mainRequestInstance, reqParams);
+        expect(result.isCached).to.be.false;
+      });
+  });
 });

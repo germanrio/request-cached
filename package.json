@@ -1,12 +1,12 @@
 {
   "name": "request-cached",
-  "version": "0.0.2",
+  "version": "1.0.0",
   "description": "This library adds to request library the ability to cache data retrieved from a real server into a local server.",
   "main": "lib/index.js",
   "scripts": {
-    "start": "mocha -w -d -R spec",
-    "test": "mocha -R spec",
-    "cov": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec",
+    "test": "mocha -R spec --require babel-polyfill --require babel-register",
+    "testw": "npm test -- --watch --inspect",
+    "cov": "istanbul cover node_modules/mocha/bin/_mocha -- -R spec --require babel-polyfill",
     "covSave": "coveralls < coverage/lcov.info"
   },
   "homepage": "https://github.com/germanrio/request-cached",
@@ -33,16 +33,21 @@
     "LICENSE"
   ],
   "dependencies": {
-    "request": "~2.64.0",
-    "lodash": "~3.10.1",
-    "mkdirp": "~0.5.1"
+    "lodash": "~4.17.4",
+    "mkdirp": "^0.5.1",
+    "request": "~2.83.0"
   },
   "devDependencies": {
-    "mocha": "~2.3.3",
-    "chai": "~3.3.0",
-    "sinon-chai": "~2.8.0",
-    "sinon": "~1.17.1",
-    "coveralls": "~2.11.4",
-    "istanbul": "~0.3.21"
+    "babel-polyfill": "^6.26.0",
+    "babel-preset-env": "^1.6.0",
+    "babel-register": "^6.26.0",
+    "chai": "~4.1.2",
+    "coveralls": "~3.0.0",
+    "eslint": "^4.8.0",
+    "eslint-config-standard": "^10.2.1",
+    "istanbul": "~0.4.5",
+    "mocha": "~4.0.0",
+    "sinon": "^4.0.0",
+    "sinon-chai": "~2.14.0"
   }
 }
