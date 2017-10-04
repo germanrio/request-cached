@@ -13,9 +13,9 @@
 [npmImg]: https://img.shields.io/npm/v/request-cached.svg
 [npmUrl]: https://npmjs.org/package/request-cached
 
-This library adds to [request library][requestWeb] the ability to cache data retrieved from a real server into a local server.
+This library adds to [request library][requestWeb] the ability to cache data retrieved from a main server into a local server.
 
-So, when you are requesting the data for the first time, the data will be retrieved from the real server and saved locally. And whenever you do the request for a second time, the data is retrieved locally.
+So, when you are requesting data for the first time, it will be retrieved from the main server and saved locally. Afterwards whenever you do the request for a second time, the data is retrieved locally.
 
 Useful when scrapping.
 
@@ -25,8 +25,10 @@ Useful when scrapping.
 ## Index
 * [Install](#install)
 * [Use](#use)
+  - [Different request objects for main and cache requests](#Different-request-objects-for-main-and-cache-requests)
   - [Params](#params)
-  - [Callback](#callback)
+  - [`Result` parameter if resolved](#Result-parameter-if-resolved)
+  - [`Error` parameter if rejected](#Error-parameter-if-rejected)
 * [Example](#example)
 * [Code testing](#code-testing)
   - [Code coverage](#code-coverage)
@@ -34,7 +36,7 @@ Useful when scrapping.
 
 
 ## Install
-Install request-cached with npm.
+Install `request-cached` with npm.
 
 ```
 npm install request-cached --save
@@ -42,37 +44,77 @@ npm install request-cached --save
 
 
 ## Use
+In order to use `request-cached` you need to provide the `request` object you want to use.
+
 ```javascript
-var requestCached = require('request-cached').getPage;
-requestCached(params, callback);
+const request = require('request'),
+    requestCached = require('request-cached')(request);
+
+return requestCached(params)
+  .then((result) => {
+    // Do something with the result
+  })
+  .catch((error) => {
+    // Do something with the error
+  });
+```
+
+
+### Different request objects for main and cache requests
+The `request` object can be any other request-compatible object like `throttled-request`. You can even provide a different object for the cache and for the main requests, as you could probably have some limitations for the requests to the main server which you don't for the local server.
+
+```javascript
+const cacheRequest = require('request'),
+    mainRequest = require('throttled-request')(cacheRequest),
+    requestCached = require('request-cached')(mainRequest, cacheRequest);
+
+mainRequest.configure({
+  requests: 2,
+  milliseconds: 1000
+});
+
+return requestCached(params)
+  .then((result) => {
+    // Do something with the result
+  })
+  .catch((error) => {
+    // Do something with the error
+  });
 ```
 
 
 ### Params
-* `main`: Compulsory object where are set the params to access real data
+* `main`: Compulsory object where are set the params to access online data
   - All possible [request params][requestParams]
 * `cache`: Optional object where are set the params to access cached data
   - All possible [request params][requestParams]
-* `save`: Optional object where are set the params to save real data
-  - path: Path to save data to
-  - parseFn: Function used to modify data before saving it
-* `request`: Optional object where are set the additional params to access real and cached data
+* `save`: Optional object where are set the params to save online data
+  - `path`: Path to save data to
+  - `parseFn`: Function used to modify data before saving it
+* `request`: Optional object where are set the additional params to access online and cached data
   - All possible [request params][requestParams]
+  - `customErrorFn`: Custom function to determine when a response is considered an error. By default:
+  ```javascript
+  customErrorFn: (error, response, body) =>
+    error || (response.statusCode !== 200) || !body
+  ```
 
 [requestParams]: https://github.com/mikeal/request#requestoptions-callback "Params in request library"
 
+### `Result` parameter if resolved
+Object with the following keys:
+- `response`: Second argument of a [request callback][requestParams]
+- `body`: Third argument of a [request callback][requestParams]
+- `isCached`: A boolean indicating whether the data is retrieved from cache or not.
 
-### Callback
-1. First argument of [request callback][requestParams]
-2. Second argument of [request callback][requestParams]
-3. Third argument of [request callback][requestParams]
-4. A boolean indicating whether the data is retrieved from cache or not.
+### `Error` parameter if rejected
+It is the first argument of a [request callback][requestParams]
 
 
 ## Example
-
 ```javascript
-var requestCached = require('request-cached').getPage;
+const request = require('request'),
+    requestCached = require('request-cached')(request);
 
 function getParams(userId) {
   return {
@@ -83,10 +125,10 @@ function getParams(userId) {
       }
     },
     cache: {
-      uri: 'http://localhost/cachedUrl/' + userId
+      uri: `http://localhost/cachedUrl/${userId}`
     },
     save: {
-      path: '/var/www/cachedUrl/' + userId
+      path: `/var/www/cachedUrl/${userId}`
     },
     request: {
       proxy: 'http://localhost:8080',
@@ -96,9 +138,13 @@ function getParams(userId) {
 }
 
 var userId = 12345;
-requestCached(getParams(userId), function (error, response, body, isCached) {
-  console.log(body);
-});
+return requestCached(getParams(userId))
+  .then((result) => {
+    console.log(result.body);
+  })
+  .catch((error) => {
+    console.error(error);
+  });
 ```
 
 
@@ -111,7 +157,7 @@ If you wanna test the code, follow these steps:
 > npm install
 > npm test
 ```
-**Note:** Of course is needed to have properly installed node and npm.
+**Note:** Of course is also needed to have properly installed `node` and `npm`.
 
 
 ### Code coverage

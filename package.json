@@ -1,7 +1,7 @@
 {
   "name": "request-cached",
   "version": "1.0.0",
-  "description": "This library adds to request library the ability to cache data retrieved from a real server into a local server.",
+  "description": "This library adds to request library the ability to cache data retrieved from a main server into a local server.",
   "main": "lib/index.js",
   "scripts": {
     "test": "mocha -R spec --require babel-polyfill --require babel-register",
@@ -29,8 +29,7 @@
   },
   "license": "MIT",
   "files": [
-    "lib",
-    "LICENSE"
+    "lib"
   ],
   "dependencies": {
     "lodash": "~4.17.4",
