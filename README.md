@@ -25,10 +25,10 @@ Useful when scrapping.
 ## Index
 * [Install](#install)
 * [Use](#use)
-  - [Different request objects for main and cache requests](#Different-request-objects-for-main-and-cache-requests)
+  - [Different request objects for main and cache requests](#different-request-objects-for-main-and-cache-requests)
   - [Params](#params)
-  - [`Result` parameter if resolved](#Result-parameter-if-resolved)
-  - [`Error` parameter if rejected](#Error-parameter-if-rejected)
+  - [`Result` parameter if resolved](#result-parameter-if-resolved)
+  - [`Error` parameter if rejected](#error-parameter-if-rejected)
 * [Example](#example)
 * [Code testing](#code-testing)
   - [Code coverage](#code-coverage)
