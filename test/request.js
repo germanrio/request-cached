@@ -29,12 +29,13 @@ describe('Request', function () {
   });
 
   describe('getCache', function () {
-    it('should throw error when no cache params', function () {
-      expect(function () {
-        getCache(requestSpy, {});
-      }).to.throw('No cache');
-
-      expect(requestSpy).to.have.not.been.called;
+    it('should reject when no cache params', function () {
+      return getCache(requestSpy, {})
+        .then(() => expect.fail(),
+          (error) => {
+            expect(requestSpy).to.have.not.been.called;
+            expect(error).to.be.ok;
+          });
     });
 
     it('should return data when params ok', function () {

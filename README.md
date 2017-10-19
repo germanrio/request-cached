@@ -95,8 +95,7 @@ return requestCached(params)
   - All possible [request params][requestParams]
   - `customErrorFn`: Custom function to determine when a response is considered an error. By default:
   ```javascript
-  customErrorFn: (error, response, body) =>
-    error || (response.statusCode !== 200) || !body
+  customErrorFn: (error, response, body) => error
   ```
 
 [requestParams]: https://github.com/mikeal/request#requestoptions-callback "Params in request library"

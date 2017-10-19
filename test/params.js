@@ -28,10 +28,7 @@ describe('Check default params', function () {
 
     expect(params.request.customErrorFn).to.be.a('function');
     expect(params.request.customErrorFn(true)).to.be.true;
-    expect(params.request.customErrorFn(false, {statusCode: 400})).to.be.true;
-    expect(params.request.customErrorFn(false, {statusCode: 200})).to.be.true;
-    expect(params.request.customErrorFn(false, {statusCode: 200}, '')).to.be.true;
-    expect(params.request.customErrorFn(false, {statusCode: 200}, 'body')).to.be.false;
+    expect(params.request.customErrorFn(false)).to.be.false;
   });
 
   it('should throw error when uri is missing', function () {

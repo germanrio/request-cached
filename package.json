@@ -1,6 +1,6 @@
 {
   "name": "request-cached",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "This library adds to request library the ability to cache data retrieved from a main server into a local server.",
   "main": "lib/index.js",
   "scripts": {
@@ -33,8 +33,7 @@
   ],
   "dependencies": {
     "lodash": "~4.17.4",
-    "mkdirp": "^0.5.1",
-    "request": "~2.83.0"
+    "mkdirp": "^0.5.1"
   },
   "devDependencies": {
     "babel-polyfill": "^6.26.0",
@@ -42,14 +41,15 @@
     "babel-register": "^6.26.0",
     "chai": "~4.1.2",
     "coveralls": "~3.0.0",
-    "eslint": "^4.8.0",
+    "eslint": "^4.9.0",
     "eslint-config-standard": "^10.2.1",
-    "eslint-plugin-import": "^2.7.0",
-    "eslint-plugin-promise": "^3.5.0",
+    "eslint-plugin-import": "^2.8.0",
+    "eslint-plugin-node": "^5.2.0",
+    "eslint-plugin-promise": "^3.6.0",
     "eslint-plugin-standard": "^3.0.1",
     "istanbul": "~0.4.5",
-    "mocha": "~4.0.0",
-    "sinon": "^4.0.0",
+    "mocha": "^4.0.0",
+    "sinon": "^4.0.1",
     "sinon-chai": "~2.14.0"
   }
 }
